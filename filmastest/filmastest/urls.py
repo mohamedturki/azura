@@ -5,6 +5,6 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
         url(r'^admin/', include(admin.site.urls)),
-        url(r'^thumbnails/', 'testapp.views.index', name="index"),
+        url(r'^', 'testapp.views.index', name="index"),
         url(r'^generate/', 'thumbgen.views.generate_thumbnail', name="generate_thumbnail")        
 )
