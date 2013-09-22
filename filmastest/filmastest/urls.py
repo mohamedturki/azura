@@ -7,7 +7,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
         url(r'^admin/', include(admin.site.urls)),
+        url(r'^thumbnails/', 'testapp.views.index', name="index"),
         url(r'^generate/', ThumbnailGeneratorView.as_view(), name="generate_thumbnail"),
-        url(r'^$', 'testapp.views.index', name="index"),
                 
 )

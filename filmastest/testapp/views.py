@@ -10,4 +10,3 @@ def index(request):
         {'films': Film.objects.all()},
         context_instance=RequestContext(request)
     )
-    # return HttpResponseRedirect('')
