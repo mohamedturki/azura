@@ -47,16 +47,15 @@ class ThumbnailGeneratorView(View):
             x_ms_blob_type='BlockBlob',
             x_ms_blob_content_type='image/jpeg'
         )
-
-        resized_blob = blob_service.list_blobs(
-            settings.AZURE_STORAGE_CONTAINER, prefix=resized_image_path
-        )
         del image
         os.remove(resized_image_filename)
 
-        response = HttpResponseRedirect(
-            resized_blob.blobs[0].url
+        image_url = "http://{0}.blob.core.windows.net/{1}/{2}".format(
+            settings.AZURE_STORAGE_ACCOUNT,
+            settings.AZURE_STORAGE_CONTAINER,
+            resized_image_path
         )
-
+        response = HttpResponseRedirect(image_url)
         response['Cache-Control'] = "max-age=414000"
+
         return response
