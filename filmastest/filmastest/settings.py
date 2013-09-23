@@ -131,11 +131,14 @@ INSTALLED_APPS = (
     'django.contrib.admin',
 
     'debug_toolbar',
+    'django_nose',
 
     'testapp',
     'thumbgen',
     
 )
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 AZURE_STORAGE_ACCOUNT = "filmastertest"
 AZURE_STORAGE_KEY = "zpSZV2sSSCfhgVrdQJD/6Bgxw23fXsHNpCDng7CyHJcRKyAmn1ND7Yn3aPyuH4xHuFQwOE+cAdOixLni8mLV+Q=="

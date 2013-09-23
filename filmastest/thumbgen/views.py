@@ -29,13 +29,13 @@ class ThumbnailGeneratorView(View):
         )
 
         original_filename = path.split('/')[-1]
-
         resized_image_filename = '{0}_{1}_{2}'.format(
             size[0], size[1], original_filename
         )
         resized_image_path = path.replace(
             original_filename, resized_image_filename
         )
+
         image.save(resized_image_filename)
         image_output = StringIO.StringIO()
         image.save(image_output, format="JPEG")

@@ -1,12 +1,7 @@
 {% extends "base.html" %}
 {% load thumbnail_tags %}
 {% block content %}
-    <h2> 50x50 </h2>
-    {% for film in films %}
-        <img src='{% thumbnail size="50x50" path=film.poster.name %}' />
-    {% endfor %}
-
-    <h2> 150x150 </h2>
+    <h2> 100x100 </h2>
     {% for film in films %}
         <img src='{% thumbnail size="150x150" path=film.poster.name %}' />
     {% endfor %}
