@@ -1,13 +1,9 @@
+import urllib
+
 from django import template
 from django.conf import settings
 
-from azure.storage import BlobService
-
 register = template.Library()
-blob_service = BlobService(
-    account_name=settings.AZURE_STORAGE_ACCOUNT,
-    account_key=settings.AZURE_STORAGE_KEY
-)
 
 
 @register.simple_tag
@@ -19,10 +15,14 @@ def thumbnail(path, size):
     )
     resized_image_path = path.replace(filename, resized_image_filename)
 
-    blob = blob_service.list_blobs(
-        settings.AZURE_STORAGE_CONTAINER, prefix=resized_image_path
+    image_url = "http://{0}.blob.core.windows.net/{1}/{2}".format(
+        settings.AZURE_STORAGE_ACCOUNT,
+        settings.AZURE_STORAGE_CONTAINER,
+        resized_image_path
     )
-    if blob.blobs:
-        return blob.blobs[0].url
-    else:
+    image = urllib.urlopen(image_url)
+
+    if image.getcode() == 200:
+        return image_url
+    elif image.getcode() == 404:
         return "/generate/?path={0}&size={1}".format(path, size)

@@ -24,10 +24,12 @@ class ThumbnailGeneratorView(View):
             settings.AZURE_STORAGE_CONTAINER,
             path
         )
-        image = Image.open(StringIO.StringIO(image_stream))
-        image = image.resize((int(size[0]), int(size[1])), Image.ANTIALIAS)
+        image = Image.open(StringIO.StringIO(image_stream)).resize(
+            (int(size[0]), int(size[1])), Image.ANTIALIAS
+        )
 
         original_filename = path.split('/')[-1]
+
         resized_image_filename = '{0}_{1}_{2}'.format(
             size[0], size[1], original_filename
         )
